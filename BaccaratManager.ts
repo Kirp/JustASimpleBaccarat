@@ -1,5 +1,10 @@
 
-class BaccMan {
+class BaccaratManager {
+    deck:string[];
+    playerHand:string[];
+    bankerHand:string[];
+    playerTotalScore:number;
+    bankerTotalScore:number;
     constructor(){
         this.deck = this.generateDefault52CardDeck();
         this.playerTotalScore = 0;
@@ -11,12 +16,12 @@ class BaccMan {
     generateDefault52CardDeck(){
         let suits = ['C', 'D', 'H','S'];
         let faces = ['2','3','4','5','6','7','8','9','10','J','Q','K','A'];
-        let cards = [];
+        let cards:string[] = [];
         for(let suitCtr  =  0; suitCtr<suits.length; suitCtr++)
         {
             for(let faceCtr = 0; faceCtr < faces.length; faceCtr++)
             {
-                cards.push(suits[suitCtr]+'_'+faces[faceCtr]);
+                cards.push(`${suits[suitCtr]}_${faces[faceCtr]}`);
             }
         }
         return cards;
@@ -37,7 +42,7 @@ class BaccMan {
         this.bankerHand.push(this.DealCardFromDeck());
         this.bankerTotalScore = this.ParseHandScore(this.bankerHand);
     }
-    ParseCardScore(card)
+    ParseCardScore(card:string)
     {
         let splitter = card.split("_");
         let face = splitter[1];
@@ -55,7 +60,7 @@ class BaccMan {
                 return parseInt(face);
         }
     }
-    ParseHandScore(cardHand)
+    ParseHandScore(cardHand:string[])
     {
         let totalScore = 0;
         for(let card of cardHand)
@@ -145,15 +150,21 @@ class BaccMan {
         }
 
 
-        return {
-            "playerHand":this.playerHand,
-            "playerScore":this.playerTotalScore,
-            "bankerHand":this.bankerHand,
-            "bankerScore":this.bankerTotalScore,
-            "winner":winner
-        }
+        return [ 
+            this.playerHand,
+            this.playerTotalScore,
+            this.bankerHand,
+            this.bankerTotalScore,
+            winner
+        ]
 
         
     }
 }
+
+const carder = new BaccaratManager();
+let result = carder.PlayAndGetResults();
+console.log(result);
+
+
 
