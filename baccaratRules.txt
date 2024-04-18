@@ -1,0 +1,23 @@
+* unless stated lets just use 1 standard decks worth of cards without the cut card since we wont have that odd history table for analyzing
+
+* starting from the player deal 2 to player and banker then player then banker
+
+** details:
+    - suits 10 or rather 0
+    - number cards are used face value with Ace being 1
+    - hands are modulo 10 which meants the highest score you can get is 9
+
+* player rule
+    - if the player has an initial total of 5 or less then get another card
+    - if player total is 6 or 7 then stand
+    - if the player has a total of 8 or 9 at the start then its autowin for the player unless the banker also has 8 or 9
+
+* banker rule
+    - if the player has only 2 cards then its the same rules as the player
+    - else:
+    total 2 - draw a third card
+    total 3 - draw a card unless players third card is an 8
+    total 4 - draw a card if players third card is 2,3,4,5,6 or 7
+    total 5 - draw a card if players third card is 4,5,6 or 7
+    total 6 - draw a card if players third card is 6,7
+    total 7 - stand
