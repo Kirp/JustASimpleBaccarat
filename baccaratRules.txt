@@ -2,10 +2,11 @@
 
 * starting from the player deal 2 to player and banker then player then banker
 
+** Rules followed are from https://en.wikipedia.org/wiki/Baccarat
 ** details:
     - suits 10 or rather 0
     - number cards are used face value with Ace being 1
-    - hands are modulo 10 which meants the highest score you can get is 9
+    - hands are modulo 10 which means the highest score you can get is 9
 
 * player rule
     - if the player has an initial total of 5 or less then get another card
@@ -15,9 +16,9 @@
 * banker rule
     - if the player has only 2 cards then its the same rules as the player
     - else:
-    total 2 - draw a third card
+    total 0 to 2 - draw a third card
     total 3 - draw a card unless players third card is an 8
     total 4 - draw a card if players third card is 2,3,4,5,6 or 7
     total 5 - draw a card if players third card is 4,5,6 or 7
     total 6 - draw a card if players third card is 6,7
-    total 7 - stand
+    total 7 to 9 - stand
