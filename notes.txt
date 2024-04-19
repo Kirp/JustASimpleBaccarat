@@ -6,3 +6,17 @@ for:
     - text box
     - announcementText
     - a chip
+
+
+required features:
+    - deal
+        - this should be just the basic baccarat card dealin
+    - payout
+        - simplify it to just double or nothing
+    - bet
+        - have a score afterwards
+    
+    nice to have:
+        - playerwallet 
+        - game status that extends past 1 deal
+        

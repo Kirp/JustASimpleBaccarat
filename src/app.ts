@@ -1,10 +1,13 @@
-import { Application, Assets } from "pixi.js";
+import { Application, Assets, Text } from "pixi.js";
 import gsap from "gsap";
 import PixiPlugin from "gsap/PixiPlugin";
 import { getButton } from "./getButton";
 import { getCard } from "./getCard";
+import { getAnnounceBox } from "./getAnnounceBox";
 
 const app = new Application();
+const appWidth:number = 800;
+const appHeight:number = 600;
 
 (async()=>
 {
@@ -18,8 +21,8 @@ async function setup()
     await app.init({
         background:"#1099bb", 
         //resizeTo: window
-        width: 800,
-        height: 600,
+        width: appWidth,
+        height: appHeight,
     });
     document.body.appendChild(app.canvas);
     gsap.registerPlugin(PixiPlugin);
@@ -29,6 +32,8 @@ async function preload()
 {
     const assets = [
         {alias: 'button_bg', src: new URL('./assets/ui/green_button00.png', import.meta.url).href},
+        {alias: 'announce_bg', src: new URL('./assets/ui/blue_panel.png', import.meta.url).href},
+        
         {alias: 'card_back', src: new URL('./assets/cards/card_back.png', import.meta.url).href},
         {alias: 'C_2', src: new URL('./assets/cards/card_spades_02.png', import.meta.url).href},
         {alias: 'C_3', src: new URL('./assets/cards/card_spades_03.png', import.meta.url).href},
@@ -50,12 +55,122 @@ async function preload()
 
 async function play()
 {
-    const button1 = getButton();
-    app.stage.addChild(button1);
+    //simpleUI stuff
 
-    const card1 = getCard();
-    app.stage.addChild(card1);
-    card1.x = 100;
-    card1.y = 100;
-    card1.scale.set(2);
+    //text stuff
+    const bankerCardsText = new Text({text: "Banker Cards"});
+    bankerCardsText.anchor.set(0.5);
+    bankerCardsText.x = appWidth/2 - 200;
+    bankerCardsText.y = 30;
+    app.stage.addChild(bankerCardsText);
+
+    const bankerTotalScoreText = new Text({text: "Total Score: 0"});
+    bankerTotalScoreText.anchor.set(0.5);
+    bankerTotalScoreText.x = bankerCardsText.x;
+    bankerTotalScoreText.y = bankerCardsText.y + 150;
+    app.stage.addChild(bankerTotalScoreText);
+    
+
+    const playerCardsText = new Text({text: "Player Cards"});
+    playerCardsText.anchor.set(0.5);
+    playerCardsText.x = appWidth/2 + 200;
+    playerCardsText.y = 30;
+    app.stage.addChild(playerCardsText);
+
+
+    const playerTotalScoreText = new Text({text: "Total Score: 0"});
+    playerTotalScoreText.anchor.set(0.5);
+    playerTotalScoreText.x = playerCardsText.x;
+    playerTotalScoreText.y = playerCardsText.y + 150;
+    app.stage.addChild(playerTotalScoreText);
+
+
+    const youBetOnText = new Text({text: "Please choose your bet"});
+    youBetOnText.anchor.set(0.5);
+    youBetOnText.x = appWidth/2;
+    youBetOnText.y = appHeight/2;
+    app.stage.addChild(youBetOnText);
+    
+
+    const yourWalletText = new Text({text: "Your Cash: 100"});
+    yourWalletText.y = appHeight-30;
+    app.stage.addChild(yourWalletText);
+
+
+    //button stuff
+    const dealButton = getButton("Deal");
+    dealButton.x = appWidth/2;
+    dealButton.y = appHeight - 80;
+
+    const betPlayerButton = getButton("bet on player");
+    betPlayerButton.x = appWidth/2 + 300;
+    betPlayerButton.y = appHeight-200;
+    
+    const betBankerButton = getButton("bet on banker");
+    betBankerButton.x = appWidth/2 - 300;
+    betBankerButton.y = appHeight-200;
+    
+    const betTieButton = getButton("bet on tie");
+    betTieButton.x = appWidth/2;
+    betTieButton.y = appHeight-200;
+
+
+
+    
+    app.stage.addChild(dealButton);
+    app.stage.addChild(betPlayerButton);
+    app.stage.addChild(betBankerButton);
+    app.stage.addChild(betTieButton);
+
+
+    //card stuff
+    const playerCard1 = getCard();
+    playerCard1.x = appWidth/2 + 100;
+    playerCard1.y = 100;
+    playerCard1.scale.set(1.5);
+
+    const playerCard2 = getCard();
+    playerCard2.changeCard("C_K");
+    playerCard2.x = appWidth/2 + 200;
+    playerCard2.y = 100;
+    playerCard2.scale.set(1.5);
+
+    const playerCard3 = getCard();
+    playerCard3.changeCard("C_10");
+    playerCard3.x = appWidth/2 + 300;
+    playerCard3.y = 100;
+    playerCard3.scale.set(1.5);
+
+    const bankerCard1 = getCard();
+    bankerCard1.x = appWidth/2 - 300;
+    bankerCard1.y = 100;
+    bankerCard1.scale.set(1.5);
+
+    const bankerCard2 = getCard();
+    bankerCard2.x = appWidth/2 - 200;
+    bankerCard2.y = 100;
+    bankerCard2.scale.set(1.5);
+    
+    const bankerCard3 = getCard();
+    bankerCard3.x = appWidth/2 - 100;
+    bankerCard3.y = 100;
+    bankerCard3.scale.set(1.5);
+
+
+
+    app.stage.addChild(playerCard1);
+    app.stage.addChild(playerCard2);
+    app.stage.addChild(playerCard3);
+
+    app.stage.addChild(bankerCard1);
+    app.stage.addChild(bankerCard2);
+    app.stage.addChild(bankerCard3);
+
+    //announcebox
+    const announceBox = getAnnounceBox();
+    announceBox.x = appWidth/2;
+    announceBox.y = appHeight/2-100;
+    announceBox.visible = false;
+    app.stage.addChild(announceBox);
+
 }

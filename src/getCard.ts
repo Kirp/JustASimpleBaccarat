@@ -1,4 +1,4 @@
-import { Container, Sprite } from "pixi.js";
+import { Container, Sprite, Assets } from "pixi.js";
 
 class CardObject extends Container
 {
@@ -8,7 +8,9 @@ class CardObject extends Container
     {
         super();
         this.cardBack = Sprite.from("card_back");
+        this.cardBack.anchor.set(0.5);
         this.cardFront = Sprite.from("C_A");
+        this.cardFront.anchor.set(0.5);
 
         this.addChild(this.cardBack);
         this.addChild(this.cardFront);
@@ -16,7 +18,7 @@ class CardObject extends Container
 
     changeCard(toCard:string)
     {
-
+        this.cardFront.texture = Assets.get(toCard);
     }
 
     ShowFront(flag:boolean)

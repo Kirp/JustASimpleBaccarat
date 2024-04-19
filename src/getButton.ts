@@ -16,9 +16,9 @@ class CustomButton extends Container{
     }
 }
 
-export function getButton()
+export function getButton(newButtonText:string = "default")
 {
-    const generatedButton = new CustomButton();
+    const generatedButton = new CustomButton(newButtonText);
 
     return generatedButton;
 }
