@@ -1,0 +1,8 @@
+- need to extends some sprites or containers
+
+for:
+    - card
+    - button
+    - text box
+    - announcementText
+    - a chip
