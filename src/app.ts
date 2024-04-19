@@ -4,6 +4,7 @@ import PixiPlugin from "gsap/PixiPlugin";
 import { getButton } from "./getButton";
 import { getCard } from "./getCard";
 import { getAnnounceBox } from "./getAnnounceBox";
+import { BaccaratManager } from "./BaccaratManager";
 
 const app = new Application();
 const appWidth:number = 800;
@@ -55,6 +56,8 @@ async function preload()
 
 async function play()
 {
+    const baccMan = new BaccaratManager();
+
     //simpleUI stuff
 
     //text stuff
@@ -98,19 +101,19 @@ async function play()
 
 
     //button stuff
-    const dealButton = getButton("Deal");
+    const dealButton = getButton("deal","Deal", buttonClicked);
     dealButton.x = appWidth/2;
     dealButton.y = appHeight - 80;
 
-    const betPlayerButton = getButton("bet on player");
+    const betPlayerButton = getButton("bet_player","bet on player", buttonClicked);
     betPlayerButton.x = appWidth/2 + 300;
     betPlayerButton.y = appHeight-200;
     
-    const betBankerButton = getButton("bet on banker");
+    const betBankerButton = getButton("bet_banker","bet on banker", buttonClicked);
     betBankerButton.x = appWidth/2 - 300;
     betBankerButton.y = appHeight-200;
     
-    const betTieButton = getButton("bet on tie");
+    const betTieButton = getButton("bet_tie","bet on tie", buttonClicked);
     betTieButton.x = appWidth/2;
     betTieButton.y = appHeight-200;
 
@@ -172,5 +175,26 @@ async function play()
     announceBox.y = appHeight/2-100;
     announceBox.visible = false;
     app.stage.addChild(announceBox);
+
+    function buttonClicked(id:String)
+    {
+        // console.log("clicked "+id);
+        switch(id){
+            case 'deal':
+                let results = baccMan.PlayAndGetResults();
+                console.log(results);
+                break;
+
+            case 'bet_player':
+                break;
+                
+            case 'bet_banker':
+                break;
+                
+            case 'bet_tie':
+                break;
+                
+        }
+    }
 
 }

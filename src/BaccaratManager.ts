@@ -1,17 +1,18 @@
 
-class BaccaratManager {
+export class BaccaratManager {
     deck:string[];
     playerHand:string[];
     bankerHand:string[];
     playerTotalScore:number;
     bankerTotalScore:number;
+    quickWin:boolean;
     constructor(){
         this.deck = this.generateDefault52CardDeck();
         this.playerTotalScore = 0;
         this.playerHand = [];
         this.bankerTotalScore = 0;
         this.bankerHand = [];
-
+        this.quickWin = false;
     }
     generateDefault52CardDeck(){
         let suits = ['C', 'D', 'H','S'];
@@ -81,6 +82,7 @@ class BaccaratManager {
         if(this.playerTotalScore<=8 || this.bankerTotalScore<=8)
         {
             //finalize!
+            this.quickWin = true;
         }else
         {
 
@@ -155,16 +157,14 @@ class BaccaratManager {
             this.playerTotalScore,
             this.bankerHand,
             this.bankerTotalScore,
-            winner
+            winner,
+            this.quickWin
         ]
 
         
     }
 }
 
-const carder = new BaccaratManager();
-let result = carder.PlayAndGetResults();
-console.log(result);
 
 
 

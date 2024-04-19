@@ -11,6 +11,7 @@ class CardObject extends Container
         this.cardBack.anchor.set(0.5);
         this.cardFront = Sprite.from("C_A");
         this.cardFront.anchor.set(0.5);
+        this.cardFront.visible = false;
 
         this.addChild(this.cardBack);
         this.addChild(this.cardFront);
@@ -23,7 +24,7 @@ class CardObject extends Container
 
     ShowFront(flag:boolean)
     {
-
+        this.cardFront.visible = flag;
     }
 }
 
