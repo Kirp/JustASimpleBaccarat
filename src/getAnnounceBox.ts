@@ -12,7 +12,7 @@ class AnnounceBox extends Container
         this.bgSprite = Sprite.from("announce_bg");
         this.bgSprite.anchor.set(0.5);
         this.bgSprite.scale.set(3);
-        this.titleText = new Text({text:"Top title text"});
+        this.titleText = new Text({text:"And the winner is..."});
         this.titleText.anchor.set(0.5);
         this.titleText.y -= 100;
         this.bodyText = new Text({text:"Body text!"});

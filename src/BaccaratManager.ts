@@ -1,3 +1,5 @@
+import { ResultData } from "./ResultData";
+
 
 export class BaccaratManager {
     deck:string[];
@@ -79,7 +81,7 @@ export class BaccaratManager {
         }
 
         //check for score of 8-9 to go for auto finalize
-        if(this.playerTotalScore<=8 || this.bankerTotalScore<=8)
+        if(this.playerTotalScore>=8 || this.bankerTotalScore>=8)
         {
             //finalize!
             this.quickWin = true;
@@ -151,16 +153,24 @@ export class BaccaratManager {
             }
         }
 
+        const resultData: ResultData = {
+            playerHand: this.playerHand,
+            playerTotalScore: this.playerTotalScore,
+            bankerHand: this.bankerHand,
+            bankerTotalScore: this.bankerTotalScore,
+            winnings: winner,
+            isQuickWin: this.quickWin
+        }
 
-        return [ 
-            this.playerHand,
-            this.playerTotalScore,
-            this.bankerHand,
-            this.bankerTotalScore,
-            winner,
-            this.quickWin
-        ]
-
+        // return [ 
+        //     this.playerHand,
+        //     this.playerTotalScore,
+        //     this.bankerHand,
+        //     this.bankerTotalScore,
+        //     winner,
+        //     this.quickWin
+        // ]
+        return resultData;
         
     }
 }
