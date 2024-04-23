@@ -15,7 +15,7 @@ class CustomButton extends Container{
 
         this.bgSprite.interactive = true;
         this.bgSprite.eventMode = 'static';
-        this.bgSprite.on('pointerdown', (event)=>{callback(this.buttonId);});
+        this.bgSprite.on('pointerdown', ()=>{callback(this.buttonId);});
         this.bgSprite.cursor = 'pointer';
 
         this.addChild(this.bgSprite);

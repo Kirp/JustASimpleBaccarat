@@ -29,6 +29,13 @@ export class BaccaratManager {
         }
         return cards;
     }
+    ResetVariables(){
+        this.deck = this.generateDefault52CardDeck();
+        this.playerTotalScore = 0;
+        this.playerHand = [];
+        this.bankerTotalScore = 0;
+        this.bankerHand = [];
+    }
     DealCardFromDeck(){
         let randomCardPosition = Math.floor(Math.random()*this.deck.length);
         let randomCard = this.deck[randomCardPosition];
@@ -74,6 +81,7 @@ export class BaccaratManager {
     }
     PlayAndGetResults()
     {
+        this.ResetVariables();
         for(let i=0; i<2; i++)
         {
             this.DealToPlayer();

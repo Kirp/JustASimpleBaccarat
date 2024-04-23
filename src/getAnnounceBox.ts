@@ -1,4 +1,4 @@
-import { Container, Assets, Sprite, Text } from "pixi.js";
+import { Container, Sprite, Text } from "pixi.js";
 
 class AnnounceBox extends Container
 {

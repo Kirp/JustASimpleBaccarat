@@ -354,6 +354,7 @@ async function play()
             lastWinnings = 0;
         }
         announceBox.visible = true;
+        gsap.from(announceBox, {y:-500, duration:0.5});
 
         playerCash += lastWinnings;
         yourWalletText.text = "Your Cash: "+playerCash;
@@ -366,7 +367,7 @@ async function play()
     {
         let results = baccMan.PlayAndGetResults();
         lastResult = results;
-        //console.log(results);        
+        // console.log(results);        
         //change the cards based on result
         playerCard1.changeCard(results.playerHand[0]);
         playerCard2.changeCard(results.playerHand[1]);
